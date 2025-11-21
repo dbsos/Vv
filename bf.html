@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLUX 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;600&display=swap');
+
+        :root {
+            --fluid-bg: #e0e0e0;
+            --neon-acid: #ccff00; /* 2026 트렌드 컬러: 애시드 라임 */
+            --chrome: #888888;
+            --deep-black: #0a0a0a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--deep-black);
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow: hidden;
+            cursor: none; /* 커서 숨김 (커스텀 커서 사용) */
+        }
+
+        /* 1. 배경: 흐르는 액체 금속 효과 (CSS Animation) */
+        .liquid-bg {
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 60%),
+                        conic-gradient(from 0deg, #1a1a1a, #333333, #000000, #1a1a1a);
+            filter: blur(80px);
+            animation: flow 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes flow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 2. 키네틱 타이포그래피 (계속 흐르는 글자) */
+        .marquee-container {
+            position: absolute;
+            top: 15%;
+            width: 100%;
+            white-space: nowrap;
+            transform: rotate(-5deg);
+            mix-blend-mode: exclusion; /* 배경과 섞이며 색상 반전 */
+            opacity: 0.8;
+        }
+
+        .marquee-text {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 8vw;
+            font-weight: 700;
+            text-transform: uppercase;
+            -webkit-text-stroke: 2px rgba(255,255,255,0.5);
+            color: transparent;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* 3. 메인 콘텐츠: 비대칭 레이아웃 */
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .center-piece {
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 5vw;
+            margin: 0;
+            line-height: 1;
+            letter-spacing: -5px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.5s;
+        }
+
+        /* 마우스 올리면 글자가 쪼개지는 효과 */
+        h1:hover {
+            letter-spacing: 10px;
+            color: var(--neon-acid);
+        }
+
+        .year {
+            display: block;
+            font-size: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 10px;
+            color: var(--neon-acid);
+            margin-bottom: 20px;
+        }
+
+        /* 4. 인터랙티브 오브제 (사진 대신 추상적인 원) */
+        .circle-portal {
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            backdrop-filter: blur(5px) invert(1); /* 색상 반전 블러 */
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* 마우스 올리면 원이 커짐 */
+        .center-piece:hover .circle-portal {
+            width: 450px;
+            height: 450px;
+            border-color: var(--neon-acid);
+            background: rgba(204, 255, 0, 0.05);
+        }
+
+        /* 5. 하단 데이터 UI */
+        .data-bar {
+            position: absolute;
+            bottom: 40px;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 20px;
+        }
+
+        .btn-future {
+            background: transparent;
+            border: 1px solid var(--neon-acid);
+            color: var(--neon-acid);
+            padding: 10px 30px;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-future:hover {
+            background: var(--neon-acid);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-acid);
+        }
+
+        /* 6. 커스텀 커서 (따라다니는 점) */
+        .cursor {
+            position: fixed;
+            width: 20px; height: 20px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: transform 0.1s;
+            mix-blend-mode: difference;
+        }
+        .cursor-dot {
+            position: fixed;
+            width: 6px; height: 6px;
+            background: var(--neon-acid);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <div class="liquid-bg"></div>
+
+    <div class="marquee-container">
+        <div class="marquee-text">
+            LIKE A VIRGIN // TOUCHED FOR THE FIRST TIME // DIGITAL LOVE // 2026 VISION // 
+            LIKE A VIRGIN // TOUCHED FOR THE FIRST TIME // DIGITAL LOVE // 2026 VISION //
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="center-piece">
+            <div class="circle-portal"></div>
+            <span class="year">EST. 2026</span>
+            <h1>DIGITAL<br>VIRGIN</h1>
+        </div>
+
+        <div class="data-bar">
+            <div>
+                Loc: Cyber Space<br>
+                Status: Online
+            </div>
+            <div>
+                <button class="btn-future" onclick="warp()">ENTER SYSTEM</button>
+            </div>
+            <div style="text-align: right;">
+                Vibe: Kinetic<br>
+                Mode: Ultra
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 커스텀 커서 움직임 스크립트
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursorDot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+
+        // 호버 효과 시 커서 커짐
+        document.querySelectorAll('h1, button').forEach(item => {
+            item.addEventListener('mouseover', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(3)';
+                cursor.style.background = '#fff';
+                cursor.style.mixBlendMode = 'difference';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.background = 'transparent';
+            });
+        });
+
+        function warp() {
+            alert("Welcome to the Future.");
+        }
+    </script>
+
+</body>
+</html>
